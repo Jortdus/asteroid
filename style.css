@@ -1,0 +1,53 @@
+html {
+    background-color: #666666;
+}
+
+.game-canvas {
+    width: 600px;
+    height: 600px;
+    background-image: url(img/space.jpg);
+    background-size: cover;
+}
+
+#space-ship {
+    position: relative;
+    transform: rotate(90deg);
+    height: 70px;
+    left: 40px;
+    top: 250px;
+}
+
+.laser {
+    position: relative;
+    width: 40px;
+    height: 30px;
+}
+
+.asteroid {
+    position: relative;
+    width: 50px;
+}
+
+.destroyed {
+    position: relative;
+    width: 50px;
+}
+
+#startbutton {
+    position: absolute;
+    left: 250px;
+    top: 240px;
+    color: white;
+    font-family: arial;
+    letter-spacing: 2px;
+    cursor: pointer;
+}
+
+.score {
+    color: white;
+    font-size: 50px;
+    padding-top: 60px;
+    width: 600px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
