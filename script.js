@@ -3,18 +3,31 @@ const gameCanvas = document.querySelector(".game-canvas");
 const laserAudio = new Audio("sound/laser.wav")
 const startButton = document.getElementById("startbutton");
 const score = document.querySelector(".score span")
-let asteroidInterval;
 
-// Ship movement code
+let asteroidInterval;
+var gameinterval;
+
+//  -- Ship movement code -- 
 
 function shipControl(event) {
+
     if (event.key === "ArrowUp") {
+        event.preventDefault();
         up();
     } else if (event.key === "ArrowDown") {
+        event.preventDefault();
         down();
-    } else if (event.key === " ") {
+    }
+
+}
+
+function laserControl(event) {
+
+    if (event.key === " ") {
+        event.preventDefault();
         fire();
     }
+
 }
 
 function up() {
@@ -30,6 +43,7 @@ function up() {
 
 }
 
+
 function down() {
     let verticalPosition = window.getComputedStyle(ship).getPropertyValue('top');
 
@@ -43,7 +57,7 @@ function down() {
 }
 
 
-// Laser code
+// -- Laser code --
 
 function fire() {
     let laser = laserCreation()
@@ -77,23 +91,23 @@ function laserMovement(laser) {
                 score.innerText = parseInt(score.innerText) + 1;
             }
         });
-        if (horizontal === 500) {
+        if (horizontal === 515) {
             laser.style.display = "none";
             laser.remove();
         } else {
             laser.style.left = horizontal + 5 + "px";
         }
-    }, 15)
+    }, 10)
 }
 
-// Asteroid code
+// -- Asteroid code --
 
 function asteroidCreation() {
     let newAsteroid = document.createElement("img");
     newAsteroid.src = "img/asteroid.png";
     newAsteroid.classList.add('asteroid');
     newAsteroid.style.top = Math.floor(Math.random() * 330) + 30 + "px";
-    newAsteroid.style.left = "480px";
+    newAsteroid.style.left = "500px";
     gameCanvas.appendChild(newAsteroid);
     asteroidMovement(newAsteroid);
 }
@@ -113,7 +127,7 @@ function asteroidMovement(asteroid) {
     }, 20)
 }
 
-// Hit registration 
+//  -- Hit registration -- 
 
 function hitRegistration(laser, asteroid) {
     let laserHorizontal = parseInt(laser.style.left);
@@ -122,7 +136,7 @@ function hitRegistration(laser, asteroid) {
     let asteroidVertical = parseInt(asteroid.style.top);
     let asteroidBottom = asteroidVertical - 50;
 
-    if (laserHorizontal != 450 && laserHorizontal + 40 >= asteroidHorizontal) {
+    if (laserHorizontal != 550 && laserHorizontal >= asteroidHorizontal) {
         if (laserVertical <= asteroidVertical && laserVertical >= asteroidBottom) {
             return true
         } else {
@@ -135,26 +149,28 @@ function hitRegistration(laser, asteroid) {
 
 }
 
-// Game events and triggers
+// -- Game events and triggers --
 
 startButton.addEventListener("click", (event) => {
     startGame();
-    startButton.style.display = "none";
 })
 
 function startGame() {
     window.addEventListener("keydown", shipControl);
-    setInterval(() => {
+    window.addEventListener("keyup", laserControl);
+    startButton.style.display = "none";
+    gameinterval = setInterval(() => {
         asteroidCreation();
     }, 5000);
 }
 
 function gameOver() {
     window.removeEventListener("keydown", shipControl);
-    setTimeout(() => {
-        clearInterval(asteroidCreation);
-        startButton.style.display = "block";
-        startButton.innerText = "Game over!";
-    }, 1000);
+    window.removeEventListener("keyup", laserControl);
+    clearInterval(gameinterval);
+    startButton.style.display = "block";
+    startButton.innerText = "Game over!";
+    startButton.style.left = 200;
+
 }
 
