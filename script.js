@@ -1,3 +1,6 @@
+// Asteroid Destroyer
+// Jort Broekhof
+
 const ship = document.getElementById("space-ship");
 const gameCanvas = document.querySelector(".game-canvas");
 const laserAudio = new Audio("sound/laser.wav")
@@ -5,7 +8,7 @@ const startButton = document.getElementById("startbutton");
 const score = document.querySelector(".score span")
 
 let asteroidInterval;
-var gameinterval;
+let gameinterval;
 
 //  -- Ship movement code -- 
 
@@ -91,7 +94,7 @@ function laserMovement(laser) {
                 score.innerText = parseInt(score.innerText) + 1;
             }
         });
-        if (horizontal === 515) {
+        if (horizontal === 550) {
             laser.style.display = "none";
             laser.remove();
         } else {
@@ -107,7 +110,7 @@ function asteroidCreation() {
     newAsteroid.src = "img/asteroid.png";
     newAsteroid.classList.add('asteroid');
     newAsteroid.style.top = Math.floor(Math.random() * 330) + 30 + "px";
-    newAsteroid.style.left = "500px";
+    newAsteroid.style.left = "550px";
     gameCanvas.appendChild(newAsteroid);
     asteroidMovement(newAsteroid);
 }
@@ -134,7 +137,7 @@ function hitRegistration(laser, asteroid) {
     let laserVertical = parseInt(laser.style.top);
     let asteroidHorizontal = parseInt(asteroid.style.left);
     let asteroidVertical = parseInt(asteroid.style.top);
-    let asteroidBottom = asteroidVertical - 50;
+    let asteroidBottom = asteroidVertical - 60;
 
     if (laserHorizontal != 550 && laserHorizontal >= asteroidHorizontal) {
         if (laserVertical <= asteroidVertical && laserVertical >= asteroidBottom) {
@@ -163,6 +166,7 @@ function startGame() {
         asteroidCreation();
     }, 5000);
 }
+
 
 function gameOver() {
     window.removeEventListener("keydown", shipControl);

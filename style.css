@@ -25,12 +25,12 @@ html {
 }
 
 .asteroid {
-    position: relative;
+    position: absolute;
     width: 50px;
 }
 
 .destroyed {
-    position: relative;
+    position: absolute;
     width: 50px;
 }
 
@@ -42,6 +42,7 @@ html {
     font-family: arial;
     letter-spacing: 2px;
     cursor: pointer;
+    user-select: none;
 }
 
 .score {
