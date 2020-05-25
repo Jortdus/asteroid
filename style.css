@@ -3,6 +3,7 @@ html {
 }
 
 .game-canvas {
+    display: inline-block;
     width: 600px;
     height: 600px;
     background-image: url(img/space.jpg);
@@ -46,9 +47,9 @@ html {
 }
 
 .score {
+    display: inline-block;
     color: white;
     font-size: 50px;
-    padding-top: 60px;
     width: 600px;
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
