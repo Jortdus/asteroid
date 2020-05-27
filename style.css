@@ -2,6 +2,10 @@ html {
     background-color: black;
 }
 
+p {
+    font-size: 45px;
+}
+
 .game-canvas {
     display: inline-block;
     width: 600px;
